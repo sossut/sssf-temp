@@ -17,15 +17,6 @@ describe('testing route /api/v1/students', () => {
     await mongoose.connection.close();
   });
 
-  it('should return all students', async () => {
-    await getAllStudents(app);
-  });
-
-  it('should return a student', async () => {
-    const students = await getAllStudents(app);
-    await getStudent(app, students[0]._id!);
-  });
-
   let student: Student;
   it('should add and return a student', async () => {
     const stdnt: Student = {
@@ -36,6 +27,14 @@ describe('testing route /api/v1/students', () => {
       student_id: 123456,
     };
     student = await postStudent(app, stdnt);
+  });
+
+  it('should return all students', async () => {
+    await getAllStudents(app);
+  });
+
+  it('should return a student', async () => {
+    await getStudent(app, student._id!);
   });
 
   it('should delete and return a student', async () => {
